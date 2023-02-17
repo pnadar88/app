@@ -3,13 +3,10 @@ const debug = require('debug')('srv:catalog-service');
 
 module.exports = cds.service.impl(async function () {
 
-    const s4hcso = await cds.connect.to('API_SALES_ORDER_SRV');
     const NeoWs = await cds.connect.to('NearEarthObjectWebService');
 
     const {
             Sales
-            ,
-            SalesOrders
             ,
             Asteroids
           } = this.entities;
@@ -58,37 +55,6 @@ module.exports = cds.service.impl(async function () {
         }
     });
 
-    this.on('READ', SalesOrders, async (req) => {
-        try {
-            const tx = s4hcso.transaction(req);
-            return await tx.send({
-                query: req.query
-            })
-        } catch (err) {
-            req.reject(err);
-        }
-    });
-
-    this.on('largestOrder', Sales, async (req) => {
-        try {
-            const tx1 = cds.tx(req);
-            const res1 = await tx1.read(Sales)
-                .where({ ID: { '=': req.params[0] } })
-                ;
-            let cql = SELECT.one(SalesOrders).where({ SalesOrganization: res1[0].org }).orderBy({ TotalNetAmount: 'desc' });
-            const tx2 = s4hcso.transaction(req);
-            const res2 = await tx2.send({
-                query: cql
-            });
-            if (res2) {
-                return res2.SoldToParty + ' @ ' + res2.TransactionCurrency + ' ' + Math.round(res2.TotalNetAmount).toString();
-            } else {
-                return 'Not found';
-            }
-        } catch (err) {
-            req.reject(err);
-        }
-    });
 
 
 

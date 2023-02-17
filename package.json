@@ -107,20 +107,6 @@
         ]
       }
       ,
-      "API_SALES_ORDER_SRV": {
-        "kind": "odata-v2",
-        "model": "srv/external/API_SALES_ORDER_SRV",
-        "credentials": {
-          "[production]": {
-            "destination": "app-API_SALES_ORDER_SRV",
-            "path": "s4hanacloud/sap/opu/odata/sap/API_SALES_ORDER_SRV"
-          },
-          "[development]": {
-            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_SALES_ORDER_SRV"
-          }
-        }
-      }
-      ,
       "NearEarthObjectWebService": {
         "kind": "rest",
         "impl": "srv/external/NearEarthObjectWebService.js",

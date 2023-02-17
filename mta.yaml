@@ -107,15 +107,6 @@ resources:
           instance:
             existing_destinations_policy: ignore
             destinations:
-              - Name: app-API_SALES_ORDER_SRV
-                Description: SAP S/4HANA Cloud Sales Order (A2X)
-                URL: https://sandbox.api.sap.com
-                Type: HTTP
-                ProxyType: Internet
-                Authentication: NoAuthentication
-                URL.headers.APIKey: <SetValueInCockpit>
-                URL.headers.Application-Interface-Key: <SetValueInCockpit>
-                HTML5.DynamicDestination: true
               - Name: app-NASA-api
                 Description: NASA APIs
                 URL: https://api.nasa.gov
